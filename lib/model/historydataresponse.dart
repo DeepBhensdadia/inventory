@@ -15,7 +15,7 @@ class Historydataresponse {
 
   final int status;
   final String message;
-  final Result result;
+  final dynamic result;
 
   Historydataresponse copyWith({
     int? status,
@@ -32,7 +32,7 @@ class Historydataresponse {
       Historydataresponse(
         status: json["status"],
         message: json["message"],
-        result: Result.fromJson(json["result"]),
+        result:json["result"] != null ? Result.fromJson(json["result"]): {},
       );
 
   Map<String, dynamic> toJson() => {

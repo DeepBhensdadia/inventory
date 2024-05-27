@@ -4,7 +4,10 @@ import 'package:inventory/inventory.dart';
 class CustomButton extends StatelessWidget {
   final String name;
 
-  const CustomButton({Key? key, required this.onPressed, required this.name})
+  final double? width;
+
+  const CustomButton(
+      {Key? key, required this.onPressed, required this.name, this.width})
       : super(key: key);
 
   final void Function() onPressed;
@@ -12,7 +15,7 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: screenwidth(context, dividedby: 2.5),
+      width: width ?? screenwidth(context, dividedby: 2.5),
 
       decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10)),

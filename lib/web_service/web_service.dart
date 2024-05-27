@@ -21,4 +21,13 @@ class WebService {
     );
     return response;
   }
+
+  static Future<Response> getRequest({
+    required Uri url,
+  }) async {
+    Response response = await get(
+      url,
+    );
+    return response;
+  }
 }

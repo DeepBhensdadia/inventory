@@ -4,9 +4,11 @@ import 'package:inventory/inventory.dart';
 import '../model/Phone_model.dart';
 import '../model/StoreCode.dart';
 import '../model/company_dashboard_data.dart';
+import '../model/editresponse.dart';
 import '../model/historydataresponse.dart';
 import '../model/locationModel.dart';
 import '../model/login_model.dart';
+import '../model/searchassetsmodel.dart';
 import '../model/updated_history.dart';
 
 class WebRepository {
@@ -45,6 +47,15 @@ class WebRepository {
     return historydataresponseFromJson(response.body);
   }
 
+  Editdata(Map<String, dynamic> data, String id) async {
+    http.Response response = await WebService.postRequest(
+      url: "${Url.url}/history_edit/$id",
+      body: data,
+    );
+    print(response.body);
+    return editresponseFromJson(response.body);
+  }
+
   storedata(Map<String, dynamic> data) async {
     http.Response response = await WebService.postRequest(
       url: Url.getcompany,
@@ -75,6 +86,17 @@ class WebRepository {
       body: phone,
     );
     return dashboarddataFromJson(response.body);
+  }
+
+  assetslist({
+    required String search,
+    required String companyid,
+  }) async {
+    http.Response response = await WebService.getRequest(
+      url: Uri.parse(
+          "${Url.url}/searchbyassetno?search=$search&company_id=$companyid"),
+    );
+    return searchassetsmodelFromJson(response.body);
   }
 }
 // http://tagmyassets.com/ivapp/api/app_login

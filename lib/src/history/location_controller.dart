@@ -19,6 +19,5 @@ class LocationController extends GetxController {
     };
 
     location = await repository.location(data);
-
   }
 }

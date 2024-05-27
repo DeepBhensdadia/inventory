@@ -221,14 +221,14 @@ class GetGroupByUserId {
 
   final String userId;
   final String name;
-  final String totalQty;
-  final String userIdTotal;
+  final dynamic totalQty;
+  final dynamic userIdTotal;
 
   GetGroupByUserId copyWith({
     String? userId,
     String? name,
-    String? totalQty,
-    String? userIdTotal,
+    dynamic totalQty,
+    dynamic userIdTotal,
   }) =>
       GetGroupByUserId(
         userId: userId ?? this.userId,

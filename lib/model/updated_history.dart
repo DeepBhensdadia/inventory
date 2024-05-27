@@ -45,6 +45,7 @@ class UpdatedHistory {
 class Result {
   Result({
     required this.tableId,
+    required this.isupdate,
     required this.userId,
     required this.productId,
     required this.availableQty,
@@ -61,6 +62,7 @@ class Result {
   });
 
   final int tableId;
+  final int isupdate;
   final String userId;
   final String productId;
   final String availableQty;
@@ -77,6 +79,7 @@ class Result {
 
   Result copyWith({
     int? tableId,
+    int? isupdate,
     String? userId,
     String? productId,
     String? availableQty,
@@ -94,6 +97,7 @@ class Result {
       Result(
         tableId: tableId ?? this.tableId,
         userId: userId ?? this.userId,
+        isupdate: isupdate ?? this.isupdate,
         productId: productId ?? this.productId,
         availableQty: availableQty ?? this.availableQty,
         tagNumber: tagNumber ?? this.tagNumber,
@@ -110,6 +114,7 @@ class Result {
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
         tableId: json["table_id"],
+        isupdate: json["is_update"] ?? 0,
         userId: json["user_id"],
         productId: json["product_id"],
         availableQty: json["available_qty"],
@@ -128,6 +133,7 @@ class Result {
   Map<String, dynamic> toJson() => {
         "table_id": tableId,
         "user_id": userId,
+        "is_update": isupdate,
         "product_id": productId,
         "available_qty": availableQty,
         "tag_number": tagNumber,

@@ -1,4 +1,6 @@
 import 'package:inventory/inventory.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:inventory/src/home/searchscreen.dart';
 
 import '../../drawer/drawer.dart';
 import '../../model/StoreCode.dart';
@@ -19,6 +21,29 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
   // final StoreController storeController = Get.put(StoreController());
+  String barcodeResult = '';
+
+  Future<void> scanBarcode() async {
+    String barcodeScanResult = await FlutterBarcodeScanner.scanBarcode(
+      '#A44D80', // Custom color
+      'Cancel',
+      false,
+      ScanMode.DEFAULT,
+    );
+
+    setState(() {
+      barcodeResult = barcodeScanResult;
+    });
+
+    if (barcodeResult != "-1") {
+      print("ksjdbvshfmnvbsjm, fbv$barcodeResult");
+      controller.assetno.text = barcodeResult;
+      context.loaderOverlay.show();
+
+      await controller.submit();
+      // Get.back();
+    }
+  }
 
   @override
   void initState() {
@@ -234,16 +259,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 keyboardType: TextInputType.number,
                 controller: controller.assetno,
                 decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-                  hintText: 'Enter Your Asset No.',
-                  hintStyle: TextStyle(
-                      color: Colors.grey,
-                      fontSize: screenheight(context, dividedby: 55)),
-                  border: const OutlineInputBorder(
-                      borderSide: BorderSide(width: 2, color: Colors.orange),
-                      gapPadding: 0,
-                      borderRadius: BorderRadius.all(Radius.circular(10))),
-                ),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                    hintText: 'Enter Your Asset No.',
+                    hintStyle: TextStyle(
+                        color: Colors.grey,
+                        fontSize: screenheight(context, dividedby: 55)),
+                    border: const OutlineInputBorder(
+                        borderSide: BorderSide(width: 2, color: Colors.orange),
+                        gapPadding: 0,
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    suffixIcon: IconButton(
+                        onPressed: () {
+                          Get.to(SearchScreen());
+                        },
+                        icon: Icon(Icons.search))),
               ),
 
               const SizedBox(height: 20),
@@ -263,8 +292,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
                         await controller.submit();
                       }),
+                  CustomButton(name: 'Scan', onPressed: () => scanBarcode()),
                 ],
-              )
+              ),
             ],
           ),
         ),

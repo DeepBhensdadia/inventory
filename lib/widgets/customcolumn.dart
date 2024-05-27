@@ -56,3 +56,40 @@ class CustomColumn extends StatelessWidget {
     );
   }
 }
+
+class customrownew extends StatelessWidget {
+ final String name;
+
+final  String value;
+
+  const customrownew({super.key, required this.name, required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return  Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Expanded(
+          flex: 2,
+          child: Text(
+           name,
+            style: const TextStyle(
+                color: Colors.purple,
+                fontSize: 18,
+                fontWeight: FontWeight.w500),
+          ),
+        ),
+        Expanded(
+          flex: 3,
+          child: Text(
+           value,
+            style: const TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w500),
+          ),
+        )
+      ],
+    );
+  }
+}

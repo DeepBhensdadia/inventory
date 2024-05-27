@@ -1,6 +1,5 @@
 class Url {
-  static String url = 'http://www.tagmyassets.com/ivappnew/api';
-
+  static String url = 'https://www.tagmyassets.com/ivappnew/api';
   static String login = '$url/app_login';
   static String Asset_details = '$url/app_get_asset_details';
   static String updatedhistory = '$url/app_user_update_quantity_history';
